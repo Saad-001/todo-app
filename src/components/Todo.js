@@ -37,6 +37,10 @@ export default function Todo({ todo }) {
     setOpenInput(!openInput);
   };
 
+  const submitHandler = (e) => {
+    console.log(e.target.value);
+  };
+
   return (
     <div
       className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-2 sm:space-x-4 border-b border-gray-400/20 last:border-0"
@@ -66,7 +70,18 @@ export default function Todo({ todo }) {
 
       <div className={`select-none flex-1 ${completed && "line-through"}`}>
         {openInput === true ? (
-          <input type="text" className="w-full" />
+          <form
+            onSubmit={submitHandler}
+            className="w-full flex justify-between space-x-2"
+          >
+            <input
+              type="text"
+              className="w-full border border-green-300 focus:outline-none py-1 px-1 rounded"
+            />
+            <button className="text-xs bg-green-500 focus:ring focus:ring-green-200 text-white px-2 sm:px-3 py-0 sm:py-1 font-semibold rounded">
+              submit
+            </button>
+          </form>
         ) : (
           <p className="text-xs sm:text-base">{text}</p>
         )}
