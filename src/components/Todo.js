@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { FiEdit } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import cancelImage from "../assets/images/cancel.png";
 import changeColor from "../redux/thunk/changeColor";
@@ -5,6 +7,8 @@ import changeStatus from "../redux/thunk/changeStatus";
 import deleteTodo from "../redux/thunk/deleteTodo";
 
 export default function Todo({ todo }) {
+  const [updateBtn, setUpdateBtn] = useState(false);
+  const [openInput, setOpenInput] = useState(false);
   const dispatch = useDispatch();
 
   const { text, id, completed, color } = todo;
@@ -21,8 +25,24 @@ export default function Todo({ todo }) {
     dispatch(deleteTodo(todoId));
   };
 
+  const mouseEnterHandler = () => {
+    setUpdateBtn(true);
+  };
+
+  const mouseOutHandler = () => {
+    setUpdateBtn(false);
+  };
+
+  const openInputHandler = () => {
+    setOpenInput(!openInput);
+  };
+
   return (
-    <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
+    <div
+      className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-2 sm:space-x-4 border-b border-gray-400/20 last:border-0"
+      onMouseOver={mouseEnterHandler}
+      onMouseOut={mouseOutHandler}
+    >
       <div
         className={`relative rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 ${
           completed && "border-green-500 focus-within:border-green-500"
@@ -45,9 +65,17 @@ export default function Todo({ todo }) {
       </div>
 
       <div className={`select-none flex-1 ${completed && "line-through"}`}>
-        {text}
+        {openInput === true ? (
+          <input type="text" className="w-full" />
+        ) : (
+          <p className="text-xs sm:text-base">{text}</p>
+        )}
       </div>
-
+      {updateBtn && (
+        <div className="cursor-pointer" onClick={openInputHandler}>
+          <FiEdit />
+        </div>
+      )}
       <div
         className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${
           color === "green" && "bg-green-500"
