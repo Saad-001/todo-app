@@ -16,7 +16,6 @@ const changeStatus = (todoId, status) => {
     );
 
     const todo = await res.json();
-    console.log(todo);
 
     dispatch(toggled(todo.id));
   };

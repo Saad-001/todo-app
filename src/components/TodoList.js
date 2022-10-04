@@ -39,9 +39,12 @@ export default function TodoList() {
       {todos
         .filter(filterByStatus)
         .filter(filterByColors)
-        .map((todo) => (
-          <Todo todo={todo} key={todo.id} />
-        ))}
+        .map((todo) => {
+          if (todo.completed === false) {
+            return <Todo todo={todo} key={todo.id} />;
+          }
+          return false;
+        })}
     </div>
   );
 }
