@@ -6,6 +6,7 @@ import {
   DELETED,
   LOADED,
   TOGGLED,
+  UPDATED,
 } from "./actionTypes";
 import initialState from "./initialState";
 
@@ -38,6 +39,18 @@ const reducer = (state = initialState, action) => {
         return {
           ...todo,
           completed: !todo.completed,
+        };
+      });
+
+    case UPDATED:
+      return state.map((todo) => {
+        if (todo.id !== action.payload.id) {
+          return todo;
+        }
+
+        return {
+          ...todo,
+          text: action.payload.text,
         };
       });
 

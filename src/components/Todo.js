@@ -5,10 +5,12 @@ import cancelImage from "../assets/images/cancel.png";
 import changeColor from "../redux/thunk/changeColor";
 import changeStatus from "../redux/thunk/changeStatus";
 import deleteTodo from "../redux/thunk/deleteTodo";
+import updateTodoText from "../redux/thunk/updateTodoText";
 
 export default function Todo({ todo }) {
   const [updateBtn, setUpdateBtn] = useState(false);
   const [openInput, setOpenInput] = useState(false);
+  const [inputText, setInputText] = useState("");
   const dispatch = useDispatch();
 
   const { text, id, completed, color } = todo;
@@ -38,7 +40,14 @@ export default function Todo({ todo }) {
   };
 
   const submitHandler = (e) => {
-    console.log(e.target.value);
+    e.preventDefault();
+    dispatch(updateTodoText(id, inputText));
+    setInputText("");
+    setOpenInput(!openInput);
+  };
+
+  const onChangeHandler = (e) => {
+    setInputText(e.target.value);
   };
 
   return (
@@ -77,6 +86,8 @@ export default function Todo({ todo }) {
             <input
               type="text"
               className="w-full border border-green-300 focus:outline-none py-1 px-1 rounded"
+              value={inputText}
+              onChange={onChangeHandler}
             />
             <button className="text-xs bg-green-500 focus:ring focus:ring-green-200 text-white px-2 sm:px-3 py-0 sm:py-1 font-semibold rounded">
               submit
