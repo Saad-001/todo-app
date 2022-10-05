@@ -20,6 +20,8 @@ const CompletedTodos = () => {
   return (
     <div className="w-full max-w-3xl shadow-lg rounded-lg p-6 bg-white">
       <div className='mt-2 text-gray-700 text-sm max-h-[300px] overflow-y-auto"'>
+        <p className="text-xs text-gray-500 mb-4">Completed Tasks</p>
+        <hr />
         {completedTodos.map((todo) => (
           <Todo todo={todo} key={todo.id} />
         ))}
