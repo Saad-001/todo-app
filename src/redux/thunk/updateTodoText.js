@@ -3,7 +3,7 @@ import { updateText } from "../todos/actions";
 const updateTodoText = (todoId, todoText) => {
   return async (dispatch) => {
     const res = await fetch(
-      `https://fakedata-server.herokuapp.com/todos/${todoId}`,
+      `https://todo-api-7k5g.onrender.com/todos/${todoId}`,
       {
         method: "PATCH",
         body: JSON.stringify({

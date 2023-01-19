@@ -97,11 +97,13 @@ export default function Todo({ todo }) {
           <p className="text-xs sm:text-base">{text}</p>
         )}
       </div>
-      {updateBtn && (
-        <div className="cursor-pointer" onClick={openInputHandler}>
-          <FiEdit />
-        </div>
-      )}
+      {completed === false
+        ? updateBtn && (
+            <div className="cursor-pointer" onClick={openInputHandler}>
+              <FiEdit />
+            </div>
+          )
+        : ""}
       <div
         className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${
           color === "green" && "bg-green-500"

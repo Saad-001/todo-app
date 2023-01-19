@@ -2,7 +2,7 @@ import { added } from "../todos/actions";
 
 const addTodos = (todoText) => {
   return async (dispatch) => {
-    const res = await fetch("https://fakedata-server.herokuapp.com/todos", {
+    const res = await fetch("https://todo-api-7k5g.onrender.com/todos", {
       method: "POST",
       body: JSON.stringify({
         text: todoText,
